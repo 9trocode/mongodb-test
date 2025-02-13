@@ -11,7 +11,7 @@ import (
 )
 
 func main() {
-      
+
 	// Define the MongoDB connection URI (adjust if necessary)
 	uri := "mongodb://pipeops:624a8aeb7d63fdd46df297d38@lingering-sun.big-action-beta.svc.pipeops.internal:27017"
 
@@ -34,6 +34,8 @@ func main() {
 	}
 
 	fmt.Println("Successfully connected to MongoDB!")
+
+	time.Sleep(30 * time.Minute)
 
 	// Disconnect from MongoDB when done
 	if err := client.Disconnect(ctx); err != nil {

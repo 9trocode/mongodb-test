@@ -11,26 +11,35 @@ import (
 )
 
 func main() {
-	uri := "mongodb://pipeops:624a8aeb7d63fdd46df297d38@lingering-sun.big-action-beta.svc.pipeops.internal:27017/?authMechanism=SCRAM-SHA-256"
-	// Set client options and apply the URI
-	clientOptions := options.Client().ApplyURI(uri)
+	// Adjust these values as needed:
+	username := "pipeops"
+	password := "624a8aeb7d63fdd46df297d38"
+	host := "lingering-sun.big-action-beta.svc.pipeops.internal:27017"
+	authSource := "admin" // Change if the user was created in a different database
 
-	// Create a context with timeout to avoid hanging connections
+	// Construct the connection URI. Try first without forcing an authMechanism.
+	uri := fmt.Sprintf("mongodb://%s:%s@%s/?authSource=%s", username, password, host, authSource)
+	// If needed, force SCRAM-SHA-256:
+	// uri := fmt.Sprintf("mongodb://%s:%s@%s/?authSource=%s&authMechanism=SCRAM-SHA-256", username, password, host, authSource)
+	fmt.Println("Connecting using URI:", uri)
+
+	clientOptions := options.Client().ApplyURI(uri)
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 
-	// Connect to MongoDB
 	client, err := mongo.Connect(ctx, clientOptions)
 	if err != nil {
 		log.Fatalf("Error connecting to MongoDB: %v", err)
 	}
 
-	// Ping the database to verify the connection
+	// Ping MongoDB to verify the connection
 	if err := client.Ping(ctx, nil); err != nil {
 		log.Fatalf("Error pinging MongoDB: %v", err)
 	}
 
-	fmt.Println("Connected to MongoDB successfully!")
+	fmt.Println("Successfully connected to MongoDB!")
+
+	time.Sleep(30 * time.Minute)
 
 	// Disconnect when done
 	if err := client.Disconnect(ctx); err != nil {

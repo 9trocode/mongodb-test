@@ -11,7 +11,7 @@ import (
 )
 
 func main() {
-	uri := "mongodb://pipeops:624a8aeb7d63fdd46df297d38@lingering-sun.big-action-beta.svc.pipeops.internal:27017/?authSource=admin&authMechanism=SCRAM-SHA-256"
+	uri := "mongodb://pipeops:624a8aeb7d63fdd46df297d38@lingering-sun.big-action-beta.svc.pipeops.internal:27017/?authSource=pipeops&authMechanism=SCRAM-SHA-256"
 	// Set client options and apply the URI
 	clientOptions := options.Client().ApplyURI(uri)
 

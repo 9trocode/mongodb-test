@@ -12,9 +12,9 @@ import (
 
 func main() {
 	// Adjust these values as needed:
-	username := "pipeops_user"
-	password := "5c9c49c9d42d744e337d04fea"
-	host := "young-snowflake.big-action-beta.svc.pipeops.internal:27017"
+	username := "34d7183a5838"
+	password := "c4d979bb1a0065593c7861662"
+	host := "dawn-shadow.big-action-beta.svc.pipeops.internal:27017"
 	authSource := "admin" // Change if the user was created in a different database
 
 	// Construct the connection URI. Try first without forcing an authMechanism.
